@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datenschutzerklärung / Privacy Policy - PiXe - Offline Retro 8-Bit Pets</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #667eea;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #555;
+            margin-top: 20px;
+        }
+        .highlight {
+            background-color: #e8f4fd;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin: 20px 0;
+        }
+        .warning {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+        .language-section {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .language-title {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            margin: -20px -20px 20px -20px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .contact {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+        }
+        .language-toggle {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .language-toggle button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .language-toggle button:hover {
+            background: #5a67d8;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Datenschutzerklärung / Privacy Policy</h1>
+        <h2 style="text-align: center; color: #667eea;">PiXe - Offline Retro 8-Bit Pets</h2>
+        
+        <div class="language-toggle">
+            <button onclick="showLanguage('de')">🇩🇪 Deutsch</button>
+            <button onclick="showLanguage('en')">🇺🇸 English</button>
+        </div>
+
+        <!-- DEUTSCH -->
+        <div id="german" class="language-section">
+            <div class="language-title">���� Deutsche Version</div>
+            
+            <div class="highlight">
+                <strong>Stand:</strong> 5. August 2025<br>
+                <strong>App-Version:</strong> 1.0.0
+            </div>
+
+            <h2>📱 App-Informationen</h2>
+            <ul>
+                <li><strong>App-Name:</strong> PiXe - Offline Retro 8-Bit Pets</li>
+                <li><strong>Entwickler:</strong> Raix3 – Dennis Purowski</li>
+                <li><strong>E-Mail:</strong> raix3.feedback@gmail.com</li>
+                <li><strong>Adresse:</strong> Ludwig-Erhard-Straße 18, c/o IP-Management #6209, 20459 Hamburg, Deutschland</li>
+            </ul>
+
+            <h2>�� Datenschutz-Grundsätze</h2>
+            
+            <h3>✅ Was wir NICHT sammeln:</h3>
+            <ul>
+                <li>Keine persönlichen Daten</li>
+                <li>Keine Nutzungsdaten</li>
+                <li>Keine Standortdaten</li>
+                <li>Keine Geräte-IDs</li>
+                <li>Keine Werbe-IDs</li>
+                <li>Keine Analytics-Daten</li>
+            </ul>
+
+            <h3>✅ Was wir NICHT übertragen:</h3>
+            <ul>
+                <li>Keine Daten an Server</li>
+                <li>Keine Cloud-Synchronisation</li>
+                <li>Keine Werbung</li>
+                <li>Keine Tracker</li>
+                <li>Keine Third-Party-Dienste</li>
+            </ul>
+
+            <div class="success">
+                <strong>🎯 Wichtig:</strong> PiXe funktioniert vollständig offline und speichert alle Daten ausschließlich lokal auf deinem Gerät!
+            </div>
+
+            <h2>�� Datenspeicherung</h2>
+            
+            <h3>Lokale Speicherung:</h3>
+            <ul>
+                <li>Alle App-Daten werden <strong>ausschließlich lokal</strong> auf deinem Gerät gespeichert</li>
+                <li>Verwendet Android's lokale Speicherung (SharedPreferences)</li>
+                <li>Keine externe Datenübertragung</li>
+            </ul>
+
+            <h3>Gespeicherte Daten:</h3>
+            <ul>
+                <li>PiXe-Pet-Informationen (Level, Prestige, Skins)</li>
+                <li>Spiel-Fortschritt</li>
+                <li>Einstellungen (Dark Mode, Sprache)</li>
+                <li>Backup-Dateien (nur bei manueller Erstellung)</li>
+            </ul>
+
+            <h2>�� Internetverbindung</h2>
+            
+            <div class="highlight">
+                <h3>Offline-Funktionalität:</h3>
+                <ul>
+                    <li>Die App funktioniert <strong>vollständig offline</strong></li>
+                    <li>Keine Internetverbindung erforderlich</li>
+                    <li>Keine Online-Features</li>
+                </ul>
+            </div>
+
+            <h3>Optionale Internetverbindung:</h3>
+            <ul>
+                <li>Nur für manuelle Backup-Erstellung/-Wiederherstellung</li>
+                <li>Nur wenn du aktiv eine Datei exportierst/importierst</li>
+            </ul>
+
+            <h2>📊 Analytics & Werbung</h2>
+            
+            <h3>Keine Analytics:</h3>
+            <ul>
+                <li>Keine Nutzungsstatistiken</li>
+                <li>Keine Crash-Reports</li>
+                <li>Keine Performance-Daten</li>
+            </ul>
+
+            <h3>Keine Werbung:</h3>
+            <ul>
+                <li>Keine Banner-Werbung</li>
+                <li>Keine Interstitial-Werbung</li>
+                <li>Keine In-App-Werbung</li>
+                <li>Keine Werbe-Tracker</li>
+            </ul>
+
+            <h2>�� App-Berechtigungen</h2>
+            
+            <h3>Erforderliche Berechtigungen:</h3>
+            <ul>
+                <li><strong>Speicherzugriff:</strong> Nur für Backup-Export/Import (optional)</li>
+                <li><strong>Widget-Berechtigung:</strong> Für Homescreen-Widget (optional)</li>
+            </ul>
+
+            <h3>Nicht erforderlich:</h3>
+            <ul>
+                <li>Internetzugriff</li>
+                <li>Standortzugriff</li>
+                <li>Kamera-Zugriff</li>
+                <li>Mikrofon-Zugriff</li>
+                <li>Kontakte-Zugriff</li>
+            </ul>
+
+            <h2>📱 Widget-Funktionalität</h2>
+            
+            <h3>Homescreen-Widget:</h3>
+            <ul>
+                <li>Zeigt aktuelles PiXe-Pet an</li>
+                <li>Verwendet nur lokale Daten</li>
+                <li>Keine externe Kommunikation</li>
+                <li>Keine Datenübertragung</li>
+            </ul>
+
+            <h2>💾 Backup-System</h2>
+            
+            <h3>Lokale Backups:</h3>
+            <ul>
+                <li>Backup-Dateien werden nur lokal erstellt</li>
+                <li>Keine Cloud-Synchronisation</li>
+                <li>Keine automatische Sicherung</li>
+                <li>Nur bei manueller Aktion</li>
+            </ul>
+
+            <h2>👥 Kinder & Jugendliche</h2>
+            
+            <h3>Datenschutz für Minderjährige:</h3>
+            <ul>
+                <li>Keine spezielle Datenerfassung für Kinder</li>
+                <li>Keine Werbung für Minderjährige</li>
+                <li>Keine personenbezogenen Daten von Kindern</li>
+            </ul>
+
+            <h2>🔒 Sicherheit</h2>
+            
+            <h3>Datensicherheit:</h3>
+            <ul>
+                <li>Alle Daten bleiben auf deinem Gerät</li>
+                <li>Keine externe Übertragung</li>
+                <li>Keine Server-Kommunikation</li>
+                <li>Lokale Verschlüsselung durch Android</li>
+            </ul>
+
+            <h2>📧 Kontakt</h2>
+            
+            <div class="contact">
+                <h3>Datenschutz-Anfragen:</h3>
+                <ul>
+                    <li><strong>E-Mail:</strong> raix3.feedback@gmail.com</li>
+                    <li><strong>Betreff:</strong> "Datenschutz - PiXe App"</li>
+                </ul>
+
+                <h3>Rechtliche Vertretung:</h3>
+                <ul>
+                    <li><strong>Verantwortlich:</strong> Dennis Purowski (Raix3)</li>
+                    <li><strong>Adresse:</strong> Ludwig-Erhard-Straße 18, c/o IP-Management #6209, 20459 Hamburg, Deutschland</li>
+                </ul>
+            </div>
+
+            <h2>⚖️ Deine Rechte</h2>
+            
+            <h3>DSGVO-Rechte:</h3>
+            <ul>
+                <li><strong>Auskunftsrecht:</strong> Du kannst erfragen, welche Daten gespeichert werden</li>
+                <li><strong>Löschungsrecht:</strong> Du kannst alle App-Daten löschen (App zurücksetzen)</li>
+                <li><strong>Datenübertragbarkeit:</strong> Du kannst deine Daten exportieren (Backup-Funktion)</li>
+                <li><strong>Widerspruchsrecht:</strong> Nicht anwendbar (keine Datenverarbeitung)</li>
+            </ul>
+
+            <h2>📝 Änderungen</h2>
+            
+            <h3>Datenschutzerklärung-Updates:</h3>
+            <ul>
+                <li>Änderungen werden hier veröffentlicht</li>
+                <li>Datum der letzten Änderung wird aktualisiert</li>
+                <li>Benutzer werden über App-Updates informiert</li>
+            </ul>
+        </div>
+
+        <!-- ENGLISH -->
+        <div id="english" class="language-section hidden">
+            <div class="language-title">🇺🇸 English Version</div>
+            
+            <div class="highlight">
+                <strong>Last Updated:</strong> August 5, 2025<br>
+                <strong>App Version:</strong> 1.0.0
+            </div>
+
+            <h2>�� App Information</h2>
+            <ul>
+                <li><strong>App Name:</strong> PiXe - Offline Retro 8-Bit Pets</li>
+                <li><strong>Developer:</strong> Raix3 – Dennis Purowski</li>
+                <li><strong>Email:</strong> raix3.feedback@gmail.com</li>
+                <li><strong>Address:</strong> Ludwig-Erhard-Straße 18, c/o IP-Management #6209, 20459 Hamburg, Germany</li>
+            </ul>
+
+            <h2>�� Privacy Principles</h2>
+            
+            <h3>✅ What we do NOT collect:</h3>
+            <ul>
+                <li>No personal data</li>
+                <li>No usage data</li>
+                <li>No location data</li>
+                <li>No device IDs</li>
+                <li>No advertising IDs</li>
+                <li>No analytics data</li>
+            </ul>
+
+            <h3>✅ What we do NOT transmit:</h3>
+            <ul>
+                <li>No data to servers</li>
+                <li>No cloud synchronization</li>
+                <li>No advertising</li>
+                <li>No trackers</li>
+                <li>No third-party services</li>
+            </ul>
+
+            <div class="success">
+                <strong>�� Important:</strong> PiXe works completely offline and stores all data exclusively on your device!
+            </div>
+
+            <h2>�� Data Storage</h2>
+            
+            <h3>Local Storage:</h3>
+            <ul>
+                <li>All app data is stored <strong>exclusively locally</strong> on your device</li>
+                <li>Uses Android's local storage (SharedPreferences)</li>
+                <li>No external data transmission</li>
+            </ul>
+
+            <h3>Stored Data:</h3>
+            <ul>
+                <li>PiXe pet information (level, prestige, skins)</li>
+                <li>Game progress</li>
+                <li>Settings (dark mode, language)</li>
+                <li>Backup files (only when manually created)</li>
+            </ul>
+
+            <h2>🌐 Internet Connection</h2>
+            
+            <div class="highlight">
+                <h3>Offline Functionality:</h3>
+                <ul>
+                    <li>The app works <strong>completely offline</strong></li>
+                    <li>No internet connection required</li>
+                    <li>No online features</li>
+                </ul>
+            </div>
+
+            <h3>Optional Internet Connection:</h3>
+            <ul>
+                <li>Only for manual backup creation/restoration</li>
+                <li>Only when you actively export/import a file</li>
+            </ul>
+
+            <h2>📊 Analytics & Advertising</h2>
+            
+            <h3>No Analytics:</h3>
+            <ul>
+                <li>No usage statistics</li>
+                <li>No crash reports</li>
+                <li>No performance data</li>
+            </ul>
+
+            <h3>No Advertising:</h3>
+            <ul>
+                <li>No banner ads</li>
+                <li>No interstitial ads</li>
+                <li>No in-app advertising</li>
+                <li>No ad trackers</li>
+            </ul>
+
+            <h2>�� App Permissions</h2>
+            
+            <h3>Required Permissions:</h3>
+            <ul>
+                <li><strong>Storage access:</strong> Only for backup export/import (optional)</li>
+                <li><strong>Widget permission:</strong> For homescreen widget (optional)</li>
+            </ul>
+
+            <h3>Not Required:</h3>
+            <ul>
+                <li>Internet access</li>
+                <li>Location access</li>
+                <li>Camera access</li>
+                <li>Microphone access</li>
+                <li>Contacts access</li>
+            </ul>
+
+            <h2>📱 Widget Functionality</h2>
+            
+            <h3>Homescreen Widget:</h3>
+            <ul>
+                <li>Shows current PiXe pet</li>
+                <li>Uses only local data</li>
+                <li>No external communication</li>
+                <li>No data transmission</li>
+            </ul>
+
+            <h2>💾 Backup System</h2>
+            
+            <h3>Local Backups:</h3>
+            <ul>
+                <li>Backup files are created locally only</li>
+                <li>No cloud synchronization</li>
+                <li>No automatic backup</li>
+                <li>Only with manual action</li>
+            </ul>
+
+            <h2>👥 Children & Minors</h2>
+            
+            <h3>Privacy for Minors:</h3>
+            <ul>
+                <li>No special data collection for children</li>
+                <li>No advertising for minors</li>
+                <li>No personal data from children</li>
+            </ul>
+
+            <h2>🔒 Security</h2>
+            
+            <h3>Data Security:</h3>
+            <ul>
+                <li>All data remains on your device</li>
+                <li>No external transmission</li>
+                <li>No server communication</li>
+                <li>Local encryption by Android</li>
+            </ul>
+
+            <h2>📧 Contact</h2>
+            
+            <div class="contact">
+                <h3>Privacy Inquiries:</h3>
+                <ul>
+                    <li><strong>Email:</strong> raix3.feedback@gmail.com</li>
+                    <li><strong>Subject:</strong> "Privacy - PiXe App"</li>
+                </ul>
+
+                <h3>Legal Representation:</h3>
+                <ul>
+                    <li><strong>Responsible:</strong> Dennis Purowski (Raix3)</li>
+                    <li><strong>Address:</strong> Ludwig-Erhard-Straße 18, c/o IP-Management #6209, 20459 Hamburg, Germany</li>
+                </ul>
+            </div>
+
+            <h2>⚖️ Your Rights</h2>
+            
+            <h3>GDPR Rights:</h3>
+            <ul>
+                <li><strong>Right of Access:</strong> You can inquire about which data is stored</li>
+                <li><strong>Right to Deletion:</strong> You can delete all app data (reset app)</li>
+                <li><strong>Data Portability:</strong> You can export your data (backup function)</li>
+                <li><strong>Right to Object:</strong> Not applicable (no data processing)</li>
+            </ul>
+
+            <h2>📝 Changes</h2>
+            
+            <h3>Privacy Policy Updates:</h3>
+            <ul>
+                <li>Changes will be published here</li>
+                <li>Date of last change will be updated</li>
+                <li>Users will be informed via app updates</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p><strong>This privacy policy applies to the app "PiXe - Offline Retro 8-Bit Pets" version 1.0.0 and higher.</strong></p>
+            <p><strong>Diese Datenschutzerklärung gilt für die App "PiXe - Offline Retro 8-Bit Pets" Version 1.0.0 und höher.</strong></p>
+            <p>© 2025 Raix3 – Dennis Purowski. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function showLanguage(lang) {
+            if (lang === 'de') {
+                document.getElementById('german').classList.remove('hidden');
+                document.getElementById('english').classList.add('hidden');
+            } else {
+                document.getElementById('german').classList.add('hidden');
+                document.getElementById('english').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

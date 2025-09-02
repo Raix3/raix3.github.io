@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Datenschutzerklärung & Impressum – BackTrace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --secondary: #4f46e5;
+      --bg-light: #f8fafc;
+      --text-dark: #1f2937;
+      --text-light: #6b7280;
+    }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: linear-gradient(135deg, var(--bg-light), #e2e8f0);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      color: var(--text-dark);
+    }
+    .container {
+      max-width: 900px;
+      background: white;
+      margin: 40px 20px;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-size: 18px;
+      color: var(--secondary);
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+    .tab {
+      padding: 10px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .tab.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+    }
+    .lang-content {
+      display: none;
+      text-align: left;
+    }
+    .lang-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    footer {
+      margin-top: 32px;
+      font-size: 13px;
+      color: var(--text-light);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active" onclick="switchLang('de')">Deutsch</button>
+      <button class="tab" onclick="switchLang('en')">English</button>
+    </div>
+    
+    <!-- German Content -->
+    <div id="lang-de" class="lang-content active">
+      <h1>Datenschutzerklärung</h1>
+      <p>Wir nehmen den Schutz Ihrer Daten sehr ernst. Die App „BackTrace“ funktioniert vollständig offline. Es werden keine personenbezogenen Daten erhoben, gespeichert oder weitergegeben.</p>
+      
+      <h2>1. Keine Datenerhebung</h2>
+      <p>Alle eingegebenen Inhalte bleiben ausschließlich auf Ihrem Gerät. Es findet keine Übertragung an Dritte statt.</p>
+      
+      <h2>2. Keine Internetverbindung notwendig</h2>
+      <p>Die App benötigt keine Internetverbindung. Ihre Daten verlassen Ihr Gerät nicht.</p>
+      
+      <h2>3. Keine Werbung oder Tracking</h2>
+      <p>Es werden weder Werbung noch Tracking-Tools verwendet.</p>
+      
+      <h2>4. Rechte der Nutzer</h2>
+      <p>Da keine Daten erhoben werden, sind Auskunfts- oder Löschanfragen nicht erforderlich. Inhalte können Sie jederzeit in der App selbst löschen.</p>
+      
+      <h2>5. Kontakt</h2>
+      <p><strong>Raix3</strong><br>
+         E-Mail: raix3.feedback@gmail.com</p>
+      
+      <h1>Impressum</h1>
+      <p><strong>Angaben gemäß § 5 TMG:</strong></p>
+      <p>
+        Raix3<br>
+        c/o IP-Management #6209<br>
+        Ludwig-Erhard-Str. 18<br>
+        20459 Hamburg<br>
+        Deutschland<br>
+        E-Mail: raix3.feedback@gmail.com
+      </p>
+    </div>
+    
+    <!-- English Content -->
+    <div id="lang-en" class="lang-content">
+      <h1>Privacy Policy</h1>
+      <p>We take your privacy very seriously. The app “BackTrace” works fully offline. No personal data is collected, stored, or shared.</p>
+      
+      <h2>1. No Data Collection</h2>
+      <p>All content entered remains solely on your device. No data is transmitted to third parties.</p>
+      
+      <h2>2. No Internet Connection Required</h2>
+      <p>The app does not require an internet connection. Your data never leaves your device.</p>
+      
+      <h2>3. No Ads or Tracking</h2>
+      <p>The app does not use ads or tracking tools.</p>
+      
+      <h2>4. User Rights</h2>
+      <p>Since no data is collected, there is no need for deletion or access requests. You can delete your content at any time within the app.</p>
+      
+      <h2>5. Contact</h2>
+      <p><strong>Raix3</strong><br>
+         E-Mail: raix3.feedback@gmail.com</p>
+      
+      <h1>Legal Notice</h1>
+      <p><strong>According to German law (§ 5 TMG):</strong></p>
+      <p>
+        Raix3<br>
+        c/o IP-Management #6209<br>
+        Ludwig-Erhard-Str. 18<br>
+        20459 Hamburg<br>
+        Germany<br>
+        E-Mail: raix3.feedback@gmail.com
+      </p>
+    </div>
+    
+    <footer>
+      Stand / Last Updated: September 2025
+    </footer>
+  </div>
+  
+  <script>
+    function switchLang(lang) {
+      document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.lang-content').forEach(div => div.classList.remove('active'));
+      
+      document.querySelector('#lang-' + lang).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

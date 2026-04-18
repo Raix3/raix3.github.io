@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zwei Stimmen · Eine Geschichte</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0c0b09;
+  --surface: #131210;
+  --card: #1a1916;
+  --border: #252320;
+  --text: #e8e0d5;
+  --soft: #9a9088;
+  --muted: #504840;
+  --gold: #c8a96e;
+  --gold-dim: rgba(200,169,110,0.12);
+  --narc: #c0392b;
+  --narc-dim: rgba(192,57,43,0.08);
+  --narc-mid: rgba(192,57,43,0.25);
+  --shadow: #6b46c1;
+  --shadow-dim: rgba(107,70,193,0.1);
+  --dark: #2d6a7a;
+  --dark-dim: rgba(45,106,122,0.1);
+  --healed: #3d7a5a;
+  --healed-dim: rgba(61,122,90,0.1);
+  --empath: #3d7a8a;
+  --empath-dim: rgba(61,122,138,0.1);
+  --empath-mid: rgba(61,122,138,0.25);
+  --white: #f4ede4;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'EB Garamond', serif;
+  font-size: 18px;
+  line-height: 1.85;
+  overflow-x: hidden;
+}
+
+/* ══ HERO ══ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(3rem, 8vw, 7rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 85%, rgba(192,57,43,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 15%, rgba(107,70,193,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(61,122,138,0.06) 0%, transparent 60%);
+}
+
+.hero-center-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(200,169,110,0.2) 30%, rgba(200,169,110,0.2) 70%, transparent);
+  transform: translateX(-50%);
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+.hero-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: up 1s 0.2s forwards;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: up 1s 0.5s forwards;
+}
+
+.hero h1 .r { color: var(--narc); }
+.hero h1 .b { color: #5aafbf; }
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--soft);
+  max-width: 600px;
+  line-height: 1.9;
+  opacity: 0;
+  animation: up 1s 0.8s forwards;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  opacity: 0;
+  animation: up 1s 1s forwards;
+}
+
+.meta-item .mn {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.meta-item .ml {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+@keyframes up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══ NAV ══ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(12,11,9,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 1rem 1.2rem;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+
+.nav-btn:hover { color: var(--text); }
+.nav-btn.on { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ══ TABS ══ */
+.tab { display: none; }
+.tab.on { display: block; }
+
+/* ══ PAGE ══ */
+.page {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 5rem 2rem 7rem;
+}
+
+.page-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+}
+
+.page-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 3rem;
+  color: var(--white);
+}
+
+.page-title .g { color: var(--gold); font-style: normal; }
+.page-title .r { color: var(--narc); font-style: normal; }
+.page-title .b { color: #5aafbf; font-style: normal; }
+.page-title .v { color: #a78bfa; font-style: normal; }
+
+/* ══ DUAL VOICE ══ */
+.dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  margin: 2.5rem 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.dual.vis { opacity: 1; transform: translateY(0); }
+@media(max-width:600px) { .dual { grid-template-columns: 1fr; } }
+
+.voice { padding: 2.5rem; position: relative; }
+
+.voice.narc-v {
+  background: linear-gradient(160deg, rgba(192,57,43,0.08) 0%, var(--card) 60%);
+  border-top: 3px solid var(--narc);
+}
+
+.voice.empath-v {
+  background: linear-gradient(160deg, rgba(61,122,138,0.08) 0%, var(--card) 60%);
+  border-top: 3px solid var(--empath);
+}
+
+.v-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.narc-v .v-label { color: var(--narc); }
+.empath-v .v-label { color: #5aafbf; }
+
+.v-text { font-size: 1rem; line-height: 1.9; color: var(--soft); }
+.v-text em { font-style: italic; color: var(--text); }
+
+.v-note {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.66rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ══ VOICE STRIP ══ */
+.voice-strip {
+  padding: 2.5rem;
+  margin: 2rem 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.voice-strip.vis { opacity: 1; transform: translateY(0); }
+
+.voice-strip.narc-s  { background: var(--narc-dim); border-left: 3px solid var(--narc); }
+.voice-strip.empath-s { background: var(--empath-dim); border-left: 3px solid var(--empath); }
+.voice-strip.shadow-s { background: var(--shadow-dim); border-left: 3px solid var(--shadow); }
+.voice-strip.dark-s   { background: var(--dark-dim); border-left: 3px solid var(--dark); }
+.voice-strip.healed-s { background: var(--healed-dim); border-left: 3px solid var(--healed); }
+.voice-strip.gold-s   { background: var(--gold-dim); border-left: 3px solid var(--gold); }
+
+.vs-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.narc-s  .vs-label { color: var(--narc); }
+.empath-s .vs-label { color: #5aafbf; }
+.shadow-s .vs-label { color: #a78bfa; }
+.dark-s   .vs-label { color: #5aafbf; }
+.healed-s .vs-label { color: #6bcf8a; }
+.gold-s   .vs-label { color: var(--gold); }
+
+.vs-title { font-size: 1.25rem; font-style: italic; color: var(--white); margin-bottom: 0.8rem; }
+.vs-body  { font-size: 0.95rem; color: var(--soft); line-height: 1.9; }
+
+/* ══ EMPATH TYPE CARD ══ */
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin: 2.5rem 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.type-grid.vis { opacity: 1; transform: translateY(0); }
+@media(max-width:600px) { .type-grid { grid-template-columns: 1fr; } }
+
+.type-card { background: var(--card); padding: 2rem; }
+
+.type-card.shadow-t { border-top: 3px solid var(--shadow); }
+.type-card.dark-t   { border-top: 3px solid var(--dark); }
+.type-card.healed-t { border-top: 3px solid var(--healed); }
+
+.tc-icon { font-size: 1.6rem; margin-bottom: 0.8rem; display: block; }
+
+.tc-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.shadow-t .tc-label { color: #a78bfa; }
+.dark-t   .tc-label { color: #5aafbf; }
+.healed-t .tc-label { color: #6bcf8a; }
+
+.tc-name {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+
+.tc-body { font-size: 0.85rem; color: var(--soft); line-height: 1.8; }
+
+.tc-power {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.shadow-t .tc-power { background: var(--shadow-dim); color: #c4b5fd; }
+.dark-t   .tc-power { background: var(--dark-dim); color: #7dd3f0; }
+.healed-t .tc-power { background: var(--healed-dim); color: #86efac; }
+
+/* ══ COMBO BOX ══ */
+.combo-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 2.5rem;
+  margin: 2rem 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.combo-box.vis { opacity: 1; transform: translateY(0); }
+
+.cb-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.cb-title { font-size: 1.3rem; font-style: italic; color: var(--white); margin-bottom: 1rem; }
+.cb-body  { font-size: 0.95rem; color: var(--soft); line-height: 1.9; }
+
+/* ══ TRAP DIAGRAM ══ */
+.trap-diagram {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 3rem 2.5rem;
+  margin: 2.5rem 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.trap-diagram.vis { opacity: 1; transform: translateY(0); }
+
+.trap-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.trap-cycle {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 2rem;
+}
+@media(max-width:500px) {
+  .trap-cycle { grid-template-columns: 1fr; }
+}
+
+.trap-side { padding: 1.5rem; }
+.ts-narc { background: var(--narc-dim); border: 1px solid var(--narc-mid); }
+.ts-emp  { background: var(--empath-dim); border: 1px solid var(--empath-mid); }
+
+.ts-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+.ts-narc .ts-name { color: var(--narc); }
+.ts-emp  .ts-name { color: #5aafbf; }
+
+.ts-steps { list-style: none; }
+.ts-steps li {
+  font-size: 0.85rem;
+  color: var(--soft);
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  gap: 0.6rem;
+}
+.ts-steps li::before { content: '→'; opacity: 0.4; flex-shrink: 0; }
+
+.trap-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 1.5rem;
+  opacity: 0.4;
+  padding-top: 1rem;
+}
+
+.trap-result {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--gold-dim);
+  border: 1px solid rgba(200,169,110,0.2);
+}
+
+.trap-result p { font-style: italic; font-size: 1rem; color: var(--gold); line-height: 1.6; }
+
+/* ══ PHASE BLOCKS ══ */
+.phase-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 2rem;
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.phase-row.vis { opacity: 1; transform: translateY(0); }
+.phase-row:last-child { border-bottom: none; }
+@media(max-width:500px) { .phase-row { grid-template-columns: 1fr; } }
+
+.ph-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.08;
+}
+
+.ph-tag {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.ph-tag.p1 { color: var(--gold); }
+.ph-tag.p2 { color: var(--empath); }
+.ph-tag.p3 { color: #7c5cbf; }
+.ph-tag.p4 { color: var(--narc); }
+
+.ph-title { font-size: 1.5rem; font-style: italic; color: var(--white); margin-bottom: 1.5rem; }
+
+.ph-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  margin-bottom: 1.5rem;
+}
+@media(max-width:480px) { .ph-dual { grid-template-columns: 1fr; } }
+
+.ph-voice { padding: 1.5rem; font-size: 0.88rem; line-height: 1.85; }
+
+.ph-voice.nv {
+  background: rgba(192,57,43,0.05);
+  color: #b08880;
+  font-style: italic;
+}
+.ph-voice.ev {
+  background: rgba(61,122,138,0.05);
+  color: #7aacb8;
+  font-style: italic;
+}
+
+.ph-voice-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  font-style: normal;
+}
+.nv .ph-voice-label { color: var(--narc); }
+.ev .ph-voice-label { color: var(--empath); }
+
+.ph-analysis { font-size: 0.9rem; color: var(--soft); line-height: 1.85; padding-top: 0.5rem; }
+
+/* ══ INJURY GRID ══ */
+.injury-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  margin: 2rem 0;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.injury-grid.vis { opacity: 1; transform: translateY(0); }
+
+.inj-card { background: var(--card); padding: 2rem; border-top: 2px solid var(--narc); }
+.inj-icon { font-size: 1.4rem; margin-bottom: 0.8rem; display: block; }
+
+.inj-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--narc);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+.inj-narc {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #a07870;
+  line-height: 1.7;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.8rem;
+}
+
+.inj-truth { font-size: 0.82rem; color: var(--soft); line-height: 1.7; }
+
+/* ══ PROSE ══ */
+.prose { max-width: 720px; margin-bottom: 2rem; }
+.prose p { font-size: 1rem; color: var(--soft); line-height: 1.95; margin-bottom: 1.5rem; }
+.prose p.big {
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--text);
+  border-left: 2px solid var(--gold);
+  padding-left: 1.5rem;
+  margin: 2.5rem 0;
+}
+.prose p strong { color: var(--text); font-weight: 400; }
+
+/* ══ FINAL BOX ══ */
+.final-box {
+  background: var(--white);
+  color: #1a1410;
+  padding: 4rem clamp(2rem, 6vw, 5rem);
+  margin: 3rem 0;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.final-box.vis { opacity: 1; transform: translateY(0); }
+
+.final-box::before {
+  content: '"';
+  position: absolute;
+  font-size: 20rem;
+  line-height: 1;
+  top: -3rem;
+  left: -1rem;
+  color: rgba(0,0,0,0.04);
+  font-style: italic;
+  pointer-events: none;
+}
+
+.fb-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: rgba(26,20,16,0.35);
+  margin-bottom: 1.5rem;
+}
+
+.fb-text {
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: #1a1410;
+  max-width: 680px;
+}
+.fb-text em { font-style: normal; color: var(--narc); font-weight: 500; }
+.fb-text span { color: var(--empath); }
+.fb-text strong { font-weight: 400; color: #1a1410; }
+
+/* ══ FADE ══ */
+.fade {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.fade.vis { opacity: 1; transform: translateY(0); }
+
+/* ══ FOOTER ══ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem 2rem;
+  text-align: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ══════════════════════════════════════
+   MOBILE — alles unter 768px
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  body { font-size: 16px; }
+
+  .hero {
+    min-height: 100svh;
+    padding: 1.8rem 1.4rem 2.2rem;
+    justify-content: flex-end;
+  }
+
+  .hero-center-line { display: none; }
+
+  .hero h1 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-label {
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-desc { font-size: 0.88rem; line-height: 1.75; }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 1.8rem;
+    padding-top: 1.4rem;
+  }
+
+  .meta-item .mn { font-size: 1.6rem; }
+  .meta-item .ml { font-size: 0.46rem; letter-spacing: 0.2em; }
+
+  /* Nav */
+  .nav {
+    justify-content: flex-start;
+    padding: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-btn {
+    padding: 0.8rem 0.85rem;
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    flex-shrink: 0;
+  }
+
+  /* Page */
+  .page { padding: 2.2rem 1.2rem 3.5rem; }
+  .page-label { font-size: 0.5rem; letter-spacing: 0.3em; }
+  .page-title { font-size: 1.75rem !important; margin-bottom: 1.8rem; line-height: 1.2; }
+
+  /* Prose */
+  .prose p { font-size: 0.92rem; line-height: 1.85; }
+  .prose p.big { font-size: 1.05rem; padding-left: 1rem; margin: 1.8rem 0; }
+
+  /* Dual voice: always single col on mobile */
+  .dual { grid-template-columns: 1fr !important; }
+  .voice { padding: 1.4rem; }
+  .v-text { font-size: 0.92rem; }
+  .v-label { font-size: 0.5rem; }
+  .v-note { font-size: 0.6rem; }
+
+  /* Voice strips */
+  .voice-strip { padding: 1.4rem; margin: 1rem 0; }
+  .vs-label { font-size: 0.5rem; }
+  .vs-title { font-size: 1rem; }
+  .vs-body { font-size: 0.88rem; }
+
+  /* Type cards: single col */
+  .type-grid { grid-template-columns: 1fr !important; }
+  .type-card { padding: 1.4rem; }
+  .tc-label { font-size: 0.52rem; }
+  .tc-name { font-size: 1rem; }
+  .tc-body { font-size: 0.82rem; }
+  .tc-power { font-size: 0.78rem; }
+
+  /* Combo box */
+  .combo-box { padding: 1.4rem; }
+  .cb-label { font-size: 0.5rem; }
+  .cb-title { font-size: 1.05rem; }
+  .cb-body { font-size: 0.88rem; }
+
+  /* Trap diagram */
+  .trap-diagram { padding: 1.6rem 1.2rem; }
+  .trap-title { font-size: 0.52rem; }
+  .trap-cycle { grid-template-columns: 1fr !important; gap: 0.8rem; }
+  .trap-arrow { transform: rotate(90deg); padding: 0.2rem 0; font-size: 1rem; }
+  .trap-side { padding: 1.1rem; }
+  .ts-name { font-size: 0.52rem; }
+  .ts-steps li { font-size: 0.78rem; }
+  .trap-result p { font-size: 0.88rem; }
+
+  /* Phase rows */
+  .phase-row { grid-template-columns: 1fr !important; gap: 0.6rem; padding: 1.8rem 0; }
+  .ph-num { display: none; }
+  .ph-tag { font-size: 0.5rem; }
+  .ph-title { font-size: 1.1rem; margin-bottom: 0.9rem; }
+  .ph-dual { grid-template-columns: 1fr !important; }
+  .ph-voice { padding: 1.1rem; font-size: 0.84rem; }
+  .ph-voice-label { font-size: 0.46rem; }
+  .ph-analysis { font-size: 0.84rem; }
+
+  /* Injury grid */
+  .injury-grid { grid-template-columns: 1fr !important; }
+  .inj-card { padding: 1.4rem; }
+  .inj-title { font-size: 0.68rem; }
+  .inj-narc { font-size: 0.8rem; }
+  .inj-truth { font-size: 0.78rem; }
+
+  /* Final box */
+  .final-box { padding: 2rem 1.4rem; margin: 2rem 0; }
+  .fb-label { font-size: 0.5rem; }
+  .fb-text { font-size: 1.05rem !important; line-height: 1.65; }
+  .final-box::before { display: none; }
+
+  footer { font-size: 0.5rem; padding: 2rem 1rem; letter-spacing: 0.2em; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-center-line"></div>
+  <div class="hero-content">
+    <p class="hero-label">Dark Empath · Shadow Empath · Geheilter Empath · Anxious-Avoidant Trap</p>
+    <h1>
+      <span class="r">Sie</span> hat gespielt.<br>
+      <span class="b">Ich</span> habe alles gesehen.<br>
+      Und sie hat sich<br>
+      <span class="r">selbst</span> zerstört.
+    </h1>
+    <p class="hero-desc">Zwei Stimmen. Eine Geschichte. Sie spricht und entlarvt sich mit jedem Wort. Ich analysiere, ohne mich klein zu machen. 50.000 Nachrichten. Vier Phasen. Drei gelöschte Accounts. Null Punkte für sie.</p>
+    <div class="hero-meta">
+      <div class="meta-item"><div class="mn">50k+</div><div class="ml">Nachrichten</div></div>
+      <div class="meta-item"><div class="mn">4–5</div><div class="ml">Monate</div></div>
+      <div class="meta-item"><div class="mn">3</div><div class="ml">Gelöschte Accounts</div></div>
+      <div class="meta-item"><div class="mn">0</div><div class="ml">Punkte für sie</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn on" data-t="profile">Profile</button>
+  <button class="nav-btn" data-t="empath">Dark · Shadow · Geheilt</button>
+  <button class="nav-btn" data-t="trap">Anxious-Avoidant Trap</button>
+  <button class="nav-btn" data-t="phasen">Die 4 Phasen</button>
+  <button class="nav-btn" data-t="kraenkung">Narzisstische Kränkung</button>
+  <button class="nav-btn" data-t="wahrheit">Das Endurteil</button>
+</nav>
+
+<!-- ══════════════════════════════════════════ TAB 1 -->
+<div class="tab on" id="t-profile">
+<div class="page">
+  <p class="page-label">Die Protagonisten</p>
+  <h2 class="page-title">Wer hier <span class="r">gespielt</span> hat.<br>Und wer hier <span class="b">alles gesehen</span> hat.</h2>
+
+  <div class="dual fade">
+    <div class="voice narc-v">
+      <p class="v-label">Die Narzisstin · Was sie wirklich gedacht hat</p>
+      <p class="v-text">
+        Er ist Streamer. Er hat eine Community. Leute kennen ihn.<br><br>
+        <em>Er ist emotional offen. Empfänglich. Das macht ihn formbar.</em><br><br>
+        Ich verstehe ihn tiefer als er sich selbst. Das sage ich ihm auch. Er glaubt es sofort. Natürlich glaubt er es. Er hat jemanden gesucht der ihn wirklich sieht. Ich zeige ihm genau das. Solange es mir nützt.
+      </p>
+      <p class="v-note">Beachte: Sie beschreibt keine Verbindung. Sie beschreibt eine Bestandsaufnahme. Streamer. Community. Formbar. Das ist kein Mensch für sie. Das ist ein Portfolio.</p>
+    </div>
+    <div class="voice empath-v">
+      <p class="v-label">Ich · Was ich heute weiß</p>
+      <p class="v-text">
+        Ich bin Pädagoge. Ich bin psychologisch tief reflektiert. Ich bin eine Kombination aus Dark, Shadow und geheiltem Empath.<br><br>
+        <em>Das bedeutet: Ich hab die Tiefe gespürt. Ich hab die Leere darunter auch gespürt. Ich hab beides gesehen.</em><br><br>
+        Ich hab zu lange gehofft dass das Erste das Zweite überwiegt. Das war mein Anteil. Nicht Schwäche. Ein Muster das ich heute kenne und nicht mehr wiederhole.
+      </p>
+      <p class="v-note">Anteil ist nicht Schuld. Anteil ist Ehrlichkeit. Wer seinen Anteil kennt wiederholt das Muster nicht. Wer ihn leugnet bleibt drin.</p>
+    </div>
+  </div>
+
+  <div class="voice-strip narc-s fade">
+    <div class="vs-label">Die Narzisstin · Über 50.000 Nachrichten</div>
+    <div class="vs-title">„Er hat so viel geredet. Das war praktisch."</div>
+    <p class="vs-body">Jedes Mal wenn er sich geöffnet hat hab ich Informationen gesammelt. Was ihn verletzt. Was er braucht. Was er fürchtet. Das ist kein Verständnis das ich beschreibe. Das ist Datenerhebung. Er hat mir sein ganzes inneres System erklärt in dem Glauben dass ich es halte. Ich hab es für später aufbewahrt.</p>
+  </div>
+
+  <div class="voice-strip empath-s fade">
+    <div class="vs-label">Ich · Über dieselben 50.000 Nachrichten</div>
+    <div class="vs-title">50.000 Nachrichten sind kein Beweis für Gegenseitigkeit. Aber sie sind Beweis für echte Investition auf meiner Seite.</div>
+    <p class="vs-body">Was ich gegeben hab war real. Das lässt sich nicht rückwirkend entwerten weil auf der anderen Seite nichts Echtes war. Mein Investment war echt. Das ist meine Seite. Der Schmerz danach war der Preis von echter Verbindung in einem System das Verbindung simuliert hat. Das ist kein Versagen. Das ist der Unterschied zwischen uns.</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════ TAB 2 -->
+<div class="tab" id="t-empath">
+<div class="page">
+  <p class="page-label">Wer ich bin</p>
+  <h2 class="page-title">Dark. Shadow. <span class="b">Geheilt.</span><br>Drei Seiten. <span class="v">Ein Mensch.</span></h2>
+
+  <div class="prose fade">
+    <p>Ich bin keine einfache Kategorie. Die meisten Menschen die über Empathie reden meinen das Bild des stillen duldsamen Mitfühlenden der sich opfert bis nichts mehr bleibt. Das bin ich nicht. Ich bin alle drei Aspekte gleichzeitig und das ist der Grund warum sie mich nicht brechen konnte.</p>
+    <p class="big">Ein Dark Empath sieht Manipulation. Ein Shadow Empath reagiert darauf ohne Schuldgefühle. Ein geheilter Empath versteht beide Seiten ohne darin unterzugehen. Die Kombination ist das Gefährlichste was einem Narzissten begegnen kann.</p>
+  </div>
+
+  <div class="type-grid fade">
+    <div class="type-card dark-t">
+      <span class="tc-icon">🌊</span>
+      <div class="tc-label">Dark Empath</div>
+      <div class="tc-name">Ich fühle was du fühlst. Und ich sehe was du versteckst.</div>
+      <p class="tc-body">Der Dark Empath hat tiefes echtes Mitgefühl aber kombiniert mit psychologischer Schärfe. Er sieht Motive. Er liest Subtext. Er durchschaut Fassaden nicht weil er zynisch ist sondern weil er zu genau fühlt um die Oberfläche zu glauben. Bei einem Narzissten bedeutet das: Er sieht die Leere hinter der Maske von Anfang an. Er hofft trotzdem. Das ist sein verwundbarster Punkt.</p>
+      <div class="tc-power">In dieser Geschichte: Ich hab ihre Lügen gespürt bevor ich sie beweisen konnte. Mein Körper wusste es früher als mein Verstand zugeben wollte.</div>
+    </div>
+    <div class="type-card shadow-t">
+      <span class="tc-icon">🌑</span>
+      <div class="tc-label">Shadow Empath</div>
+      <div class="tc-name">Wenn du mich verrätst zeige ich dir was hinter meiner Geduld war.</div>
+      <p class="tc-body">Der Shadow Empath ist der geheilte Empath der gelernt hat seine Schattenseite zu integrieren statt zu verdrängen. Er ist loyal bis zum Verrat. Danach ist er präzise, kalt und vollständig. Kein Drama. Kein Schreien. Nur Konsequenz. Er dokumentiert. Er exposed. Er entzieht sich. Der Narzisst hat keine Waffe gegen jemanden der seinen eigenen Schatten kennt weil er keine Angst damit erzeugen kann.</p>
+      <div class="tc-power">In dieser Geschichte: Ich hab geleakt. Ruhig. Faktisch. Ohne Entschuldigung. Das war mein Schatten der die Wahrheit schützt. Nicht Rache. Integrität.</div>
+    </div>
+    <div class="type-card healed-t">
+      <span class="tc-icon">🔥</span>
+      <div class="tc-label">Geheilter Empath</div>
+      <div class="tc-name">Ich kenne mein Muster. Ich wiederhole es nicht. Ich verstehe es für andere.</div>
+      <p class="tc-body">Der geheilte Empath hat die eigenen Wunden angeschaut. Er weiß warum er bestimmte Menschen anzieht. Er weiß was in ihm auf Manipulation reagiert. Er hat das Anxious-Avoidant Muster in sich selbst verstanden nicht nur beschrieben. Und als Pädagoge trägt er dieses Wissen weiter. Die eigene Geschichte wird Lernstoff. Nicht Trauma das man versteckt.</p>
+      <div class="tc-power">In dieser Geschichte: Ich hab meinen anhänglichen Bindungsstil nicht verleugnet. Ich hab ihn benannt. Das ist der Unterschied zwischen jemandem der das nächste Mal dasselbe tut und jemandem der es nie wieder tut.</div>
+    </div>
+  </div>
+
+  <div class="combo-box fade">
+    <div class="cb-label">Die Kombination · Warum sie mich nicht brechen konnte</div>
+    <div class="cb-title">Dark sieht sie. Shadow reagiert. Geheilt versteht. Zusammen sind die unbesiegbar.</div>
+    <p class="cb-body">Das ist kein Ego. Das ist Struktur. Der Dark Empath in mir hat ihre Manipulation gespürt und durchschaut. Der Shadow Empath in mir hat gehandelt als die Grenze überschritten war ohne zusammenzubrechen. Der geheilte Empath in mir hat den eigenen Anteil benannt ohne darin zu versinken. Sie hat versucht genau diese drei Teile zu aktivieren um mich zu destabilisieren. Tod vortäuschen zielt auf den Dark Empath. Community vergiften zielt auf den Shadow Empath. Schuldzuweisungen zielen auf den unheilten Empath. Aber ich bin geheilt. Alle drei Teile haben geantwortet. Nicht mit Chaos. Mit Klarheit.</p>
+  </div>
+
+  <div class="dual fade">
+    <div class="voice narc-v">
+      <p class="v-label">Die Narzisstin · Über mich</p>
+      <p class="v-text">
+        <em>Er ist zu empfindlich. Er überdenkt alles. Seine Empathie macht ihn schwach.</em><br><br>
+        Er fühlt zu viel. Das macht ihn kontrollierbar. Wenn ich die richtigen Hebel drücke reagiert er. Ich muss nur herausfinden welche.
+      </p>
+      <p class="v-note">Sie hat Empathie als Schwäche gelesen. Das ist der Irrtum jedes Narzissten. Empathie ist nicht Weichheit. Sie ist Radar. Und ihr Radar war auf mich gerichtet.</p>
+    </div>
+    <div class="voice empath-v">
+      <p class="v-label">Ich · Was sie falsch eingeschätzt hat</p>
+      <p class="v-text">
+        <em>Sie dachte Empathie bedeutet dass ich keine Grenzen habe.</em><br><br>
+        Empathie bedeutet ich sehe was hinter deiner Grenze ist. Ich spüre die Leere. Ich spüre die Angst. Und genau weil ich das spüre konnte ich dich nie vollständig kontrollieren lassen. Weil ich wusste was du bist. Die ganze Zeit.
+      </p>
+      <p class="v-note">Das ist der Moment wo der Narzisst verliert bevor der Kampf beginnt. Ein Mensch der dich wirklich sieht lässt sich nicht von einer Fassade blenden. Und ich habe sie gesehen.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════ TAB 3 -->
+<div class="tab" id="t-trap">
+<div class="page">
+  <p class="page-label">Bindungspsychologie</p>
+  <h2 class="page-title">Der <span class="g">Anxious-Avoidant Trap.</span><br>Die Schleife aus der man nicht einfach rauskommt.</h2>
+
+  <div class="prose fade">
+    <p>Der Anxious-Avoidant Trap funktioniert nicht weil man schwach ist. Er funktioniert weil zwei Bindungssysteme sich gegenseitig aktivieren auf eine Weise die sich wie Schicksal anfühlt. Man nennt es auch den Anxious-Avoidant Dance. Beide bewegen sich. Keiner kommt weiter. Und beide glauben das ist Tiefe.</p>
+    <p class="big">Ängstliche Anhänglichkeit auf vermeidende Distanz trifft sich exakt an dem Punkt wo Trauma auf Trauma trifft und sich gegenseitig als Heimat erkennt. Das ist keine Liebe. Das ist Wiederholung.</p>
+  </div>
+
+  <div class="trap-diagram fade">
+    <div class="trap-title">Der Anxious-Avoidant Dance · Der Zyklus</div>
+    <div class="trap-cycle">
+      <div class="trap-side ts-narc">
+        <div class="ts-name">Narzisstin · Vermeidend distanziert</div>
+        <ul class="ts-steps">
+          <li>Gibt Wärme um Kontrolle zu sichern</li>
+          <li>Zieht sich zurück wenn Nähe real wird</li>
+          <li>Wartet bis Entzug Annäherung erzwingt</li>
+          <li>Kommt zurück wenn Versorgung ausbleibt</li>
+          <li>Gibt wieder Wärme als Belohnung</li>
+          <li>Entzieht sofort wieder sobald sicher</li>
+          <li>Wiederholt endlos ohne Auflösung</li>
+        </ul>
+      </div>
+      <div class="trap-arrow">⇄</div>
+      <div class="trap-side ts-emp">
+        <div class="ts-name">Ich · Ängstlich anhänglich</div>
+        <ul class="ts-steps">
+          <li>Erlebe Distanz als Signal eigenes Versagen</li>
+          <li>Investiere mehr um Verbindung zu halten</li>
+          <li>Erleichterung wenn Wärme zurückkommt</li>
+          <li>Gehirn lernt: mehr geben bringt sie zurück</li>
+          <li>Gibt beim nächsten Entzug noch mehr</li>
+          <li>Bindung vertieft sich durch jeden Zyklus</li>
+          <li>Bis der Dark Empath das Muster erkennt</li>
+        </ul>
+      </div>
+    </div>
+    <div class="trap-result">
+      <p>Der Trap optimiert sich gegen den Empathes. Bis der Empath aufhört zu optimieren und anfängt zu sehen. Das war der Moment wo der Trap brach.</p>
+    </div>
+  </div>
+
+  <div class="voice-strip narc-s fade">
+    <div class="vs-label">Die Narzisstin · Über Schweigen als Waffe</div>
+    <div class="vs-title">„Wenn ich schweige kommt er mit mehr. Das funktioniert jedes Mal."</div>
+    <p class="vs-body">Rückzug erzeugt Annäherung. Das ist kein Kalkül das ich erkläre. Es ist einfach was ich gelernt hab. Ich muss nichts tun außer warten. Er füllt das Schweigen. Immer. Er schreibt. Er fragt ob alles okay ist. Er gibt mir das Gefühl dass sein Wert daran hängt ob ich antworte. Perfekt.</p>
+  </div>
+
+  <div class="voice-strip shadow-s fade">
+    <div class="vs-label">Mein Shadow Empath · Über den Moment wo das Muster klar wurde</div>
+    <div class="vs-title">Ich hab das Schweigen irgendwann nicht mehr gefüllt. Das war der Anfang vom Ende für sie.</div>
+    <p class="vs-body">Der Shadow Empath in mir hat an einem bestimmten Punkt aufgehört zu reagieren wie erwartet. Kein Hinterherlaufen. Kein Fragen ob alles okay ist. Stille gegen Stille. Das hat das System gebrochen weil das System auf meine Angst angewiesen war. Als die Angst weg war hatte sie nichts mehr zu steuern.</p>
+  </div>
+
+  <div class="voice-strip gold-s fade">
+    <div class="vs-label">Als Pädagoge · Was dieser Trap lehrt</div>
+    <div class="vs-title">Internet-Freundschaften verstärken diesen Trap weil das Medium dem Vermeidenden maximale Kontrolle gibt.</div>
+    <p class="vs-body">Online kann man mit einem Klick offline gehen. Man kann lesen ohne zu antworten. Man kann Präsenz simulieren oder entziehen nach Belieben. Der vermeidende Typ bekommt ein Kontrollinstrument das offline nicht existiert. Der ängstlich anhängliche liest jede Abwesenheit als Signal und antwortet mit mehr Geben. Als Streamer bin ich doppelt exponiert weil ich öffentlich emotional zugänglich bin. Das macht mich sichtbar für genau die Menschen die das als Eintrittstor nutzen.</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════ TAB 4 -->
+<div class="tab" id="t-phasen">
+<div class="page">
+  <p class="page-label">Der Ablauf</p>
+  <h2 class="page-title">Vier Phasen.<br><span class="r">Ihre Stimme.</span> <span class="b">Meine Analyse.</span></h2>
+
+  <div class="phase-row fade">
+    <div class="ph-num" style="color:var(--gold)">I</div>
+    <div class="ph-inner">
+      <div class="ph-tag p1">Phase Eins · Idealisierung</div>
+      <div class="ph-title">Sie hat mich nicht geliebt. Sie hat mich inventarisiert.</div>
+      <div class="ph-dual">
+        <div class="ph-voice nv">
+          <div class="ph-voice-label">Narzisstin · Intern</div>
+          Er ist Streamer. Er hat Reichweite. Er öffnet sich schnell. Ich gebe ihm das Gefühl einzigartig zu sein und er gibt mir alles zurück. Zuschauer. Aufmerksamkeit. Status durch Assoziation. Ich muss nur spiegeln was er hören will. Das ist nicht schwer.
+        </div>
+        <div class="ph-voice ev">
+          <div class="ph-voice-label">Ich · Dark Empath Perspektive</div>
+          Es hat sich angefühlt wie das erste Mal wirklich gesehen werden. Nicht von einem Publikum sondern von einer Person. Als Streamer kennst du den Unterschied. Tausend sehen dich. Aber sehen sie dich wirklich? Sie schien es zu tun. Mein Dark Empath hat trotzdem etwas gespürt das nicht stimmte. Ich hab es überhört. Das war die Entscheidung die ich heute anders treffe.
+        </div>
+      </div>
+      <p class="ph-analysis">Idealisierung zielt immer auf das was fehlt. Bei jemandem der öffentlich sichtbar aber privat nach echter Verbindung sucht ist das eine präzise Zielerfassung. Sie hat nicht zufällig das Richtige gesagt. Sie hat gespiegelt was fehlte. Das ist kein Talent. Das ist Technik.</p>
+    </div>
+  </div>
+
+  <div class="phase-row fade">
+    <div class="ph-num" style="color:var(--empath)">II</div>
+    <div class="ph-inner">
+      <div class="ph-tag p2">Phase Zwei · Bindung</div>
+      <div class="ph-title">50.000 Nachrichten. Meine Seele. Ihr Datenarchiv.</div>
+      <div class="ph-dual">
+        <div class="ph-voice nv">
+          <div class="ph-voice-label">Narzisstin · Intern</div>
+          Je mehr er redet desto mehr weiß ich. Jede Schwachstelle die er mir zeigt ist eine die ich später nutzen kann wenn er unbequem wird. Vorerst bin ich einfach da. Investition. Das wird sich auszahlen. Er glaubt das ist Freundschaft. Ich nenne es Vorbereitung.
+        </div>
+        <div class="ph-voice ev">
+          <div class="ph-voice-label">Ich · Was ich investiert hab</div>
+          Meine Zeit. Meine echten Gedanken. Dinge die ich offline kaum jemandem sage. Ich hab mich vollständig eingelassen weil mein Dark Empath echte Momente gespürt hat die wirklich echt waren. Nicht alles war Lüge. Das ist das Verwirrende. Aber das Fundament war es. Und ein Fundament aus Lüge trägt keine Wahrheit.
+        </div>
+      </div>
+      <p class="ph-analysis">Der Narzisst investiert exakt so viel wie nötig um die Ressource aktiv zu halten. Der Empath investiert vollständig. Das schafft eine strukturelle Asymmetrie die unsichtbar ist bis sie kollabiert.</p>
+    </div>
+  </div>
+
+  <div class="phase-row fade">
+    <div class="ph-num" style="color:#7c5cbf">III</div>
+    <div class="ph-inner">
+      <div class="ph-tag p3">Phase Drei · Entwertung</div>
+      <div class="ph-title">Sie hat nicht nur mich angegriffen. Sie hat meine Community benutzt. Meine Zuschauer. Meine Leute.</div>
+      <div class="ph-dual">
+        <div class="ph-voice nv">
+          <div class="ph-voice-label">Narzisstin · Intern</div>
+          Er konfrontiert mich. Das ist inakzeptabel. Ich verliere die Kontrolle über die Geschichte. Also gehe ich zu seinen Zuschauern. Zu den anderen Streamern. Ich erzähle meine Version. Er ist toxisch. Zu empfindlich. Ich bin das Opfer. Seine eigenen Leute sollen gegen ihn sein. Dann ist er isoliert. Dann hab ich wieder Kontrolle.
+        </div>
+        <div class="ph-voice ev">
+          <div class="ph-voice-label">Ich · Shadow Empath Reaktion</div>
+          Das war der Moment wo jede Restzweifel in mir verstummt ist. Sie ist nicht nur zu mir gegangen. Sie ist zu Menschen gegangen die mich kennen. Zu meiner Community. Das ist kein Konflikt mehr. Das ist Kriegserklärung. Und ich war ruhig. Weil mein Shadow Empath wusste: Ruhe ist das Einzige was einen Narzissten wirklich destabilisiert. Kein Drama. Keine Reaktion die sie nutzen kann. Nur Stille. Und Screenshots.
+        </div>
+      </div>
+      <p class="ph-analysis">Das Einbeziehen der Community ist narzisstische Triangulation auf maximaler Ebene. Flying Monkeys werden aktiviert weil die direkte Kontrolle entglitten ist. Das ist kein Zeichen von Stärke. Das ist Eskalation aus Panik. Und Panik hinterlässt Spuren.</p>
+    </div>
+  </div>
+
+  <div class="phase-row fade">
+    <div class="ph-num" style="color:var(--narc)">IV</div>
+    <div class="ph-inner">
+      <div class="ph-tag p4">Phase Vier · Zerstörung</div>
+      <div class="ph-title">Tod vortäuschen. Meinen Dark Empath als Hebel benutzen. Ihr letzter und dümmster Zug.</div>
+      <div class="ph-dual">
+        <div class="ph-voice nv">
+          <div class="ph-voice-label">Narzisstin · Intern</div>
+          Er ist zu stabil. Normale Manipulation reicht nicht mehr. Ich täusche den Tod vor. Krankenhaus. Schuld erzeugen. Schock. Er bricht zusammen. Er kommt zurück. Er entschuldigt sich für alles. Ich hab die Kontrolle zurück. Das funktioniert immer bei Empathes. Sie können den Tod nicht ignorieren.
+        </div>
+        <div class="ph-voice ev">
+          <div class="ph-voice-label">Ich · Was wirklich passiert ist</div>
+          Sie hat meinen Dark Empath als Waffe benutzen wollen. Mein tiefstmenschliches Mitgefühl als Hebel. Das ist nicht Manipulation mehr. Das ist psychologische Gewalt. Aber mein Dark Empath hat was ihr gefehlt hat: Er überprüft. Er hat nachgefragt. Er hat nicht geglaubt. Und mein Shadow Empath hat die Screenshots gesichert. Schwarz auf weiß. Ihre eigenen Worte. Sie und jemand anderes über meinen geplanten Untergang. Kein Zweifel mehr. Nur Bestätigung.
+        </div>
+      </div>
+      <p class="ph-analysis">Den Tod vorzutäuschen ist das verzweifeltste Mittel im Arsenal eines Narzissten. Es zeigt nicht Cleverness. Es zeigt den Grad der Panik. Das ist der letzte Zug eines Systems das verloren hat und weiß dass es verloren hat. Der Unterschied zwischen einem verletzten und einem geheilten Empath: Der verletzte glaubt die Lüge. Der geheilte überprüft sie. Und dokumentiert was er findet.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════ TAB 5 -->
+<div class="tab" id="t-kraenkung">
+<div class="page">
+  <p class="page-label">Der Kollaps</p>
+  <h2 class="page-title">Narzisstische Kränkung.<br><span class="r">Sie hat sich selbst gefickt.</span></h2>
+
+  <div class="prose fade">
+    <p>Narzisstische Kränkung ist kein Beleidigtsein. Es ist das Einreißen des einzigen Fundaments das ein Narzisst hat: das öffentliche Bild. Wenn das bricht gibt es keine Reparatur. Nur Flucht.</p>
+    <p class="big">Sie hat mit jedem Schachzug das nächste Kapitel meines Beweises geschrieben. Sie dachte sie greift an. In Wirklichkeit hat sie sich selbst entlarvt. Screenshot für Screenshot. Lüge für Lüge.</p>
+  </div>
+
+  <div class="injury-grid fade">
+    <div class="inj-card">
+      <span class="inj-icon">🎭</span>
+      <div class="inj-title">Maske fällt öffentlich</div>
+      <div class="inj-narc">„Das ist aus dem Kontext gerissen. Er hat das manipuliert. Das bin nicht ich."</div>
+      <div class="inj-truth">Der Chat war eindeutig. Ihre eigenen Worte. Ihre eigene Absicht. Kein Kontext der das erklärt. Kein Edit. Kein Schnitt. Nur sie und ihre Pläne gegen mich. Gesichert. Geleakt. Gesehen.</div>
+    </div>
+    <div class="inj-card">
+      <span class="inj-icon">📵</span>
+      <div class="inj-title">3 Accounts gelöscht</div>
+      <div class="inj-narc">„Ich entscheide wann ich gehe. Das war meine Entscheidung. Ich brauche das nicht."</div>
+      <div class="inj-truth">Man löscht keine drei Accounts wenn man die Kontrolle hat. Man löscht sie wenn der Boden wegbricht und kein einziges Spielfeld mehr kontrollierbar ist. Das ist kein Rückzug aus Stärke. Das ist Flucht aus Panik.</div>
+    </div>
+    <div class="inj-card">
+      <span class="inj-icon">🧊</span>
+      <div class="inj-title">Kein Zusammenbruch bei mir</div>
+      <div class="inj-narc">„Er ist kalt. Er hat nie wirklich gefühlt. Das beweist was ich immer gesagt hab."</div>
+      <div class="inj-truth">Ich war nicht kalt. Ich war geerdet. Das ist das Einzige was einen Narzissten wirklich erschüttert. Kein Drama bedeutet keine Kontrolle. Kein emotionaler Fuel bedeutet kein Werkzeug. Das System kollabiert ohne Reaktion.</div>
+    </div>
+    <div class="inj-card">
+      <span class="inj-icon">👥</span>
+      <div class="inj-title">Community und Zuschauer</div>
+      <div class="inj-narc">„Seine Zuschauer sind manipuliert. Er hat sie aufgewiegelt. Das ist unfair."</div>
+      <div class="inj-truth">Sie hat meine Zuschauer und andere Streamer gegen mich mobilisiert. Als die Originalbeweise sichtbar wurden fiel die Narrative auseinander. Fakten sind keine Meinung. Sie sind nicht widerlegbar.</div>
+    </div>
+    <div class="inj-card">
+      <span class="inj-icon">💀</span>
+      <div class="inj-title">Vorgetäuschter Tod flog auf</div>
+      <div class="inj-narc">„Er hat kein Mitgefühl. Er hat nicht mal gefragt ob es mir gut geht. Das sagt alles über ihn."</div>
+      <div class="inj-truth">Ich hab gefragt. Ich hab nicht geglaubt. Das ist kein fehlendenes Mitgefühl. Das ist ein Dark Empath der überprüft statt zu schlucken. Die Lüge stand nackt. Ohne Krankenhaus. Ohne Arzt. Ohne irgendetwas außer ihrer Geschichte.</div>
+    </div>
+    <div class="inj-card">
+      <span class="inj-icon">🔒</span>
+      <div class="inj-title">Verlust der Narrative</div>
+      <div class="inj-narc">„Er hat mich exposet. Das ist eine Verletzung meiner Privatsphäre. Er ist der Angreifer."</div>
+      <div class="inj-truth">Sie hat geplant mich zu zerstören. Ich hab die Pläne sichtbar gemacht. Das ist kein Angriff. Das ist Wahrheit gegen Narrative. Der Unterschied: Ich hatte Beweise. Sie hatte Versionen.</div>
+    </div>
+  </div>
+
+  <div class="voice-strip shadow-s fade">
+    <div class="vs-label">Mein Shadow Empath · Über das Leaken</div>
+    <div class="vs-title">Ich hab nicht aus Rache geleakt. Ich hab geleakt weil Wahrheit keinen Anwalt braucht. Sie zeigt sich selbst.</div>
+    <p class="vs-body">Der Shadow Empath in mir hat keine Entschuldigung gebraucht für das was ich getan hab. Keine Rechtfertigung. Keine Erklärung. Die Screenshots haben gesprochen. Ihre eigenen Worte. Ihr eigenes Gesicht hinter der Maske. Ich hab es nur sichtbar gemacht. Das nennt sich Konsequenz. Nicht Rache. Konsequenz.</p>
+  </div>
+
+  <div class="voice-strip narc-s fade">
+    <div class="vs-label">Die Narzisstin · Was sie nie verstehen wird</div>
+    <div class="vs-title">„Er hat mich zerstört."</div>
+    <p class="vs-body">Nein. Sie hat sich selbst zerstört. Mit jedem Schachzug. Mit der Lüge über das Krankenhaus. Mit den Nachrichten über meinen Untergang die sie mit jemand anderem geteilt hat. Mit dem Rufmord bei meiner Community. Mit den drei gelöschten Accounts. Ich hab nichts erfunden. Ich hab nur aufgezeigt was sie selbst produziert hat. Das ist das Tragischste an narzisstischer Kränkung: Das System zerstört sich selbst und nennt es die Schuld des anderen.</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════ TAB 6 -->
+<div class="tab" id="t-wahrheit">
+<div class="page">
+  <p class="page-label">Das Endurteil</p>
+  <h2 class="page-title">Was bleibt.<br><span class="b">Was ich weiß.</span><br><span class="r">Was sie nie begreifen wird.</span></h2>
+
+  <div class="dual fade">
+    <div class="voice narc-v">
+      <p class="v-label">Die Narzisstin · Was sie sich erzählt</p>
+      <p class="v-text">
+        <em>Ich hab gewählt zu gehen. Das war meine Entscheidung.</em><br><br>
+        Er war zu viel. Zu kompliziert. Er hat mich nicht verstanden. Ich hab alles gegeben was ich konnte. Er hat es nicht geschätzt. Das ist sein Verlust. Ich find jemand anderen.
+      </p>
+      <p class="v-note">Sie wird diese Geschichte bis ans Ende glauben. Nicht weil sie lügt. Weil ihr Selbstbild keine andere Geschichte zulässt. Drei gelöschte Accounts. Aber in ihrer Version ist sie die Heldin die gegangen ist.</p>
+    </div>
+    <div class="voice empath-v">
+      <p class="v-label">Ich · Was tatsächlich passiert ist</p>
+      <p class="v-text">
+        <em>Sie ist nicht gegangen. Sie ist geflohen.</em><br><br>
+        Gegangen wäre: ein Gespräch. Eine Erklärung. Eine Grenze. Fliehen ist: drei Accounts löschen weil der Boden unter einem weggebrochen ist und man keine einzige Fläche mehr kontrollieren kann.
+      </p>
+      <p class="v-note">Das ist keine Interpretation. Das ist Verhaltensmuster. Wer geht hinterlässt etwas. Wer flieht löscht sich selbst.</p>
+    </div>
+  </div>
+
+  <div class="voice-strip dark-s fade">
+    <div class="vs-label">Mein Dark Empath · Die finale Einordnung</div>
+    <div class="vs-title">Ich hab die Tiefe gespürt die echt war. Und die Leere die darunter war. Beides gleichzeitig. Das ist das Geschenk und der Fluch des Dark Empaths.</div>
+    <p class="vs-body">Es gab echte Momente. Das zu leugnen wäre unehrlich. Aber echte Momente in einem falschen Fundament sind keine Wahrheit. Sie sind Köder. Und mein Dark Empath hat irgendwann aufgehört den Köder vom Angelhaken zu trennen. Das hat den Unterschied gemacht.</p>
+  </div>
+
+  <div class="voice-strip shadow-s fade">
+    <div class="vs-label">Mein Shadow Empath · Was der Schatten getan hat</div>
+    <div class="vs-title">Ich hab meinen Schatten nicht verdrängt. Ich hab ihn benutzt um die Wahrheit zu schützen. Das ist Integration, nicht Regression.</div>
+    <p class="vs-body">Ein ungeheilter Empath hätte entweder still gelitten oder ausgerastet. Ich hab keins von beidem getan. Ich hab dokumentiert. Ich hab exposed. Ruhig. Präzise. Ohne Drama. Das ist mein Schatten der für etwas Echtes einsteht. Nicht für Ego. Für Wahrheit. Das ist der Unterschied der alles bedeutet.</p>
+  </div>
+
+  <div class="voice-strip healed-s fade">
+    <div class="vs-label">Mein geheilter Empath · Was das alles lehrt</div>
+    <div class="vs-title">Gift für mein Herz. Chaos für ihren Verstand. Beide Sätze sind wahr. Und beide erklären warum das so intensiv war.</div>
+    <p class="vs-body">Sie war Gift für mein Herz weil echter Mitgefühl sich ausnutzen lässt wenn man die eigenen Grenzen nicht genug schützt. Das ist mein Anteil. Nicht Schuld. Anteil. Und ich war Chaos für ihren Verstand weil ein Mensch der wirklich sieht und dokumentiert und benennt ein System destabilisiert das auf Unsichtbarkeit angewiesen ist. Als Pädagoge nehme ich beides als Lernstoff. Für mich. Für andere die dasselbe erleben und nicht wissen was gerade mit ihnen passiert.</p>
+  </div>
+
+  <div class="final-box fade">
+    <div class="fb-label">Das Endurteil · Ohne Entschuldigung</div>
+    <p class="fb-text">
+      Sie hat versucht mich zu brechen.<br>
+      Mit <em>Lügen</em>. Mit vorgetäuschtem Tod. Mit meiner Community gegen mich. Mit Rufmord bei Streamern die mich kennen.<br><br>
+      <strong>Ich bin nicht gebrochen.</strong><br><br>
+      Mein Dark Empath hat sie gesehen. Mein Shadow Empath hat reagiert. Mein geheilter Empath hat verstanden.<br><br>
+      Ich hab dokumentiert. Ich hab geleakt. Ich hab die Wahrheit sichtbar gemacht.<br><br>
+      <span>Sie hat drei Accounts gelöscht.<br>Sie ist verschwunden.<br>Sie hat sich selbst zerstört.</span><br><br>
+      <strong>Ich stream noch.</strong>
+    </p>
+  </div>
+
+  <div class="voice-strip narc-s fade">
+    <div class="vs-label">Ein letztes Wort an sie · Falls sie das je liest</div>
+    <div class="vs-title">Du hast mich nicht zerstört. Du hast dich selbst entlarvt. Das war nie mein Plan. Das war deiner.</div>
+    <p class="vs-body">Jede Lüge die du erzählt hast. Jeder Streamer den du kontaktiert hast. Jeder Zuschauer den du gegen mich wenden wolltest. Jeder Screenshot den du von mir geteilt hast. Jede Eskalation. Der vorgetäuschte Tod. Die Pläne über meinen Untergang die du mit jemand anderem geteilt hast während du mir gegenüber Freundschaft gespielt hast. All das hast du produziert. Ich hab es nur aufgezeigt. Du dachtest du greifst an. Du hast dich selbst begraben. Drei Accounts. Weg. Und ich hab den Beweis noch.</p>
+  </div>
+
+</div>
+</div>
+
+<!-- TIKTOK SECTION -->
+<section id="tiktok-section" style="
+  border-top: 1px solid #252320;
+  padding: 4rem 2rem;
+  text-align: center;
+  background: #0f0e0c;
+  position: relative;
+  overflow: hidden;
+">
+  <div style="
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(200,169,110,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  "></div>
+  <div style="position: relative; z-index: 1; max-width: 480px; margin: 0 auto;">
+    <p style="
+      font-family: 'Syne', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: #504840;
+      margin-bottom: 1.2rem;
+    ">Der Autor</p>
+    <p style="
+      font-family: 'EB Garamond', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #f4ede4;
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    ">Diese Geschichte gehört mir.<br>Und ich stream noch.</p>
+    <p style="
+      font-size: 0.9rem;
+      color: #504840;
+      margin-bottom: 2.5rem;
+      font-family: 'EB Garamond', serif;
+    ">Game Streamer · Dark / Shadow / Geheilter Empath · Pädagoge</p>
+
+    <a href="https://www.tiktok.com/@prod.raix3" target="_blank" rel="noopener" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      background: #1a1916;
+      border: 1px solid #2a2825;
+      border-top: 2px solid #c8a96e;
+      padding: 1.2rem 2rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    "
+    onmouseover="this.style.background='#222018'; this.style.borderColor='#c8a96e';"
+    onmouseout="this.style.background='#1a1916'; this.style.borderTopColor='#c8a96e'; this.style.borderRightColor='#2a2825'; this.style.borderBottomColor='#2a2825'; this.style.borderLeftColor='#2a2825';"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z" fill="#c8a96e"/>
+      </svg>
+      <span style="
+        font-family: 'Syne', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #c8a96e;
+      ">@prod.raix3</span>
+      <span style="
+        font-family: 'Syne', sans-serif;
+        font-size: 0.58rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #504840;
+        margin-left: 0.3rem;
+      ">auf TikTok</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  Dark Empath · Shadow Empath · Geheilter Empath · Narzisstische Bindungsdynamik · Anxious-Avoidant Trap
+</footer>
+
+<script>
+  // Move TikTok section into each tab so it's always visible
+  const tiktokSection = document.getElementById('tiktok-section');
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.appendChild(tiktokSection.cloneNode(true));
+  });
+  tiktokSection.remove();
+
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+      btn.classList.add('on');
+      document.getElementById('t-' + btn.dataset.t).classList.add('on');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(observe, 80);
+    });
+  });
+
+  function observe() {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.dual, .voice-strip, .trap-diagram, .phase-row, .injury-grid, .final-box, .fade, .type-grid, .combo-box').forEach(el => io.observe(el));
+  }
+
+  observe();
+</script>
+</body>
+</html>

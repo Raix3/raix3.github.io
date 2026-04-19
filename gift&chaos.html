@@ -49,8 +49,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(3rem, 8vw, 7rem);
+  justify-content: center;
+  padding: clamp(2rem, 6vw, 6rem);
   position: relative;
   overflow: hidden;
 }
@@ -75,6 +75,36 @@ body {
 }
 
 .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+/* Logo als Watermark hinter Headline-Bereich */
+.hero-head {
+  position: relative;
+  margin-bottom: 0;
+  overflow: visible;
+}
+
+.hero-logo {
+  position: absolute;
+  z-index: 0;
+  right: -2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(240px, 40vw, 500px);
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.13;
+  pointer-events: none;
+  user-select: none;
+  filter: brightness(1.12) contrast(0.92);
+  mix-blend-mode: screen;
+}
+
+.hero-head-inner {
+  position: relative;
+  z-index: 1;
+}
 
 .hero-label {
   font-family: 'Syne', sans-serif;
@@ -174,6 +204,57 @@ body {
 
 .nav-btn:hover { color: var(--text); }
 .nav-btn.on { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* ══ LESER:INNEN (im Hero, unter dem Text) ══ */
+.reader-note {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  text-align: left;
+  line-height: 1.65;
+  max-width: 600px;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  border: none;
+  background: none;
+  opacity: 0;
+  animation: up 1s 1.15s forwards;
+}
+
+/* ══ AUDIO (Tab-Begleitung, Dateien in /lieder/) ══ */
+.audio-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  padding: 0.55rem 1rem 0.65rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(19,18,16,0.95);
+  font-family: 'Syne', sans-serif;
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.audio-bar label {
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.audio-bar input[type="checkbox"] {
+  width: 0.95rem;
+  height: 0.95rem;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
 
 /* ══ TABS ══ */
 .tab { display: none; }
@@ -647,9 +728,18 @@ footer {
   body { font-size: 16px; }
 
   .hero {
-    min-height: 100svh;
-    padding: 1.8rem 1.4rem 2.2rem;
-    justify-content: flex-end;
+    min-height: auto;
+    padding: 2rem 1.4rem 2.5rem;
+    justify-content: flex-start;
+  }
+
+  .hero-logo {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -40%);
+    width: min(88vw, 340px);
+    opacity: 0.1;
+    mix-blend-mode: screen;
   }
 
   .hero-center-line { display: none; }
@@ -763,6 +853,19 @@ footer {
   .final-box::before { display: none; }
 
   footer { font-size: 0.5rem; padding: 2rem 1rem; letter-spacing: 0.2em; }
+
+  .reader-note {
+    font-size: 0.54rem;
+    letter-spacing: 0.05em;
+    margin-top: 1.35rem;
+    line-height: 1.6;
+  }
+
+  .audio-bar {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.48rem;
+    letter-spacing: 0.1em;
+  }
 }
 </style>
 </head>
@@ -773,32 +876,50 @@ footer {
   <div class="hero-bg"></div>
   <div class="hero-center-line"></div>
   <div class="hero-content">
-    <p class="hero-label">Dark Empath · Shadow Empath · Geheilter Empath · Anxious-Avoidant Trap</p>
-    <h1>
-      <span class="r">Sie</span> hat gespielt.<br>
-      <span class="b">Ich</span> habe alles gesehen.<br>
-      Und sie hat sich<br>
-      <span class="r">selbst</span> zerstört.
-    </h1>
-    <p class="hero-desc">Zwei Stimmen. Eine Geschichte. Sie spricht und entlarvt sich mit jedem Wort. Ich analysiere, ohne mich klein zu machen. 50.000 Nachrichten. Vier Phasen. Drei gelöschte Accounts. Null Punkte für sie.</p>
+    <div class="hero-head">
+      <img class="hero-logo" src="logo/8128.png" alt="" width="460" height="200" decoding="async" fetchpriority="high" aria-hidden="true" />
+      <div class="hero-head-inner">
+        <p class="hero-label">Dark Empath · Shadow Empath · Geheilter Empath · Anxious-Avoidant Trap</p>
+        <h1>
+          <span class="r">Sie</span> hat gespielt.<br>
+          <span class="b">Ich</span> habe alles gesehen.<br>
+          Und sie hat sich<br>
+          <span class="r">selbst</span> zerstört.
+        </h1>
+      </div>
+    </div>
+    <p class="hero-desc">Zwei Stimmen. Eine Geschichte. Sie spricht und entlarvt sich mit jedem Wort. Ich analysiere, ohne mich klein zu machen. 50k+ Nachrichten. Es waren weitaus mehr. Vier Phasen. Drei gelöschte Accounts. Null Punkte für sie.</p>
     <div class="hero-meta">
       <div class="meta-item"><div class="mn">50k+</div><div class="ml">Nachrichten</div></div>
       <div class="meta-item"><div class="mn">4–5</div><div class="ml">Monate</div></div>
       <div class="meta-item"><div class="mn">3</div><div class="ml">Gelöschte Accounts</div></div>
       <div class="meta-item"><div class="mn">0</div><div class="ml">Punkte für sie</div></div>
     </div>
+    <p class="reader-note" role="note">
+      Die Worte hier sind bewusst scharf. Sie richten sich gegen die beschriebene Dynamik, nicht gegen dich als lesende Person, wenn du dich fragst, wo du hier stehst.<br /><br />
+      Keine Namen, keine Identifikation Dritter. Es geht um Muster und eigene Erfahrung.
+    </p>
   </div>
 </section>
 
 <!-- NAV -->
-<nav class="nav">
+<nav class="nav" aria-label="Hauptnavigation">
   <button class="nav-btn on" data-t="profile">Profile</button>
   <button class="nav-btn" data-t="empath">Dark · Shadow · Geheilt</button>
   <button class="nav-btn" data-t="trap">Anxious-Avoidant Trap</button>
+  <button class="nav-btn" data-t="erkennen">Erkennen und Grenzen</button>
   <button class="nav-btn" data-t="phasen">Die 4 Phasen</button>
   <button class="nav-btn" data-t="kraenkung">Narzisstische Kränkung</button>
   <button class="nav-btn" data-t="wahrheit">Das Endurteil</button>
 </nav>
+
+<div class="audio-bar">
+  <label for="audio-enable">
+    <input type="checkbox" id="audio-enable" />
+    Ruhige Musikbegleitung zum jeweiligen Bereich
+  </label>
+</div>
+<audio id="tab-audio" preload="none" loop></audio>
 
 <!-- ══════════════════════════════════════════ TAB 1 -->
 <div class="tab on" id="t-profile">
@@ -828,14 +949,14 @@ footer {
   </div>
 
   <div class="voice-strip narc-s fade">
-    <div class="vs-label">Die Narzisstin · Über 50.000 Nachrichten</div>
+    <div class="vs-label">Die Narzisstin · Über 50k+ Nachrichten</div>
     <div class="vs-title">„Er hat so viel geredet. Das war praktisch."</div>
     <p class="vs-body">Jedes Mal wenn er sich geöffnet hat hab ich Informationen gesammelt. Was ihn verletzt. Was er braucht. Was er fürchtet. Das ist kein Verständnis das ich beschreibe. Das ist Datenerhebung. Er hat mir sein ganzes inneres System erklärt in dem Glauben dass ich es halte. Ich hab es für später aufbewahrt.</p>
   </div>
 
   <div class="voice-strip empath-s fade">
-    <div class="vs-label">Ich · Über dieselben 50.000 Nachrichten</div>
-    <div class="vs-title">50.000 Nachrichten sind kein Beweis für Gegenseitigkeit. Aber sie sind Beweis für echte Investition auf meiner Seite.</div>
+    <div class="vs-label">Ich · Über dieselben 50k+ Nachrichten</div>
+    <div class="vs-title">50k+ Nachrichten sind kein Beweis für Gegenseitigkeit. Aber sie sind Beweis für echte Investition auf meiner Seite.</div>
     <p class="vs-body">Was ich gegeben hab war real. Das lässt sich nicht rückwirkend entwerten weil auf der anderen Seite nichts Echtes war. Mein Investment war echt. Das ist meine Seite. Der Schmerz danach war der Preis von echter Verbindung in einem System das Verbindung simuliert hat. Das ist kein Versagen. Das ist der Unterschied zwischen uns.</p>
   </div>
 
@@ -879,7 +1000,7 @@ footer {
 
   <div class="combo-box fade">
     <div class="cb-label">Die Kombination · Warum sie mich nicht brechen konnte</div>
-    <div class="cb-title">Dark sieht sie. Shadow reagiert. Geheilt versteht. Zusammen sind die unbesiegbar.</div>
+    <div class="cb-title">Dark sieht sie. Shadow reagiert. Geheilt versteht. Zusammen sind sie unbesiegbar.</div>
     <p class="cb-body">Das ist kein Ego. Das ist Struktur. Der Dark Empath in mir hat ihre Manipulation gespürt und durchschaut. Der Shadow Empath in mir hat gehandelt als die Grenze überschritten war ohne zusammenzubrechen. Der geheilte Empath in mir hat den eigenen Anteil benannt ohne darin zu versinken. Sie hat versucht genau diese drei Teile zu aktivieren um mich zu destabilisieren. Tod vortäuschen zielt auf den Dark Empath. Community vergiften zielt auf den Shadow Empath. Schuldzuweisungen zielen auf den unheilten Empath. Aber ich bin geheilt. Alle drei Teile haben geantwortet. Nicht mit Chaos. Mit Klarheit.</p>
   </div>
 
@@ -946,7 +1067,7 @@ footer {
       </div>
     </div>
     <div class="trap-result">
-      <p>Der Trap optimiert sich gegen den Empathes. Bis der Empath aufhört zu optimieren und anfängt zu sehen. Das war der Moment wo der Trap brach.</p>
+      <p>Der Trap optimiert sich gegen den Empath. Bis der Empath aufhört zu optimieren und anfängt zu sehen. Das war der Moment wo der Trap brach.</p>
     </div>
   </div>
 
@@ -966,6 +1087,44 @@ footer {
     <div class="vs-label">Als Pädagoge · Was dieser Trap lehrt</div>
     <div class="vs-title">Internet-Freundschaften verstärken diesen Trap weil das Medium dem Vermeidenden maximale Kontrolle gibt.</div>
     <p class="vs-body">Online kann man mit einem Klick offline gehen. Man kann lesen ohne zu antworten. Man kann Präsenz simulieren oder entziehen nach Belieben. Der vermeidende Typ bekommt ein Kontrollinstrument das offline nicht existiert. Der ängstlich anhängliche liest jede Abwesenheit als Signal und antwortet mit mehr Geben. Als Streamer bin ich doppelt exponiert weil ich öffentlich emotional zugänglich bin. Das macht mich sichtbar für genau die Menschen die das als Eintrittstor nutzen.</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════ TAB ERKENNEN -->
+<div class="tab" id="t-erkennen">
+<div class="page">
+  <p class="page-label">Einordnung</p>
+  <h2 class="page-title">Erkennen.<br><span class="b">Grenzen.</span> <span class="g">Nicht jeder Konflikt ist dasselbe.</span></h2>
+
+  <div class="prose fade">
+    <p class="big">Was hier steht ist meine Geschichte und meine Einordnung. Es ist keine Diagnose für andere Menschen und kein Ersatz für Therapie oder Beratung. Wenn du in akuter Belastung oder Gefahr bist, hol dir Unterstützung bei Fachpersonen oder über die Telefonseelsorge.</p>
+    <p>Trotzdem kann es helfen, Muster zu benennen. Nicht um andere zu verurteilen, sondern um dich besser zu schützen und zu entscheiden was du weiterhin trägst und was nicht.</p>
+  </div>
+
+  <div class="voice-strip empath-s fade">
+    <div class="vs-label">Frühe Signale · Woran du ein Muster merken kannst</div>
+    <div class="vs-title">Das sind keine Beweise für eine Person, aber Gründe aufmerksam zu werden.</div>
+    <p class="vs-body">Widersprüche zwischen Worten und Taten wiederholen sich statt sich zu klären. Du passt dich stark an, die andere Seite kaum. Nähe wird zeitweise entzogen und kommt zurück wie eine Belohnung. Dein Körper reagiert mit Anspannung oder Schlafproblemen bevor du es sauber benennen kannst. Deine Grenzen werden getestet, umgangen oder ins Lächerliche gezogen. Nach einem Konflikt bist du leer oder du wirst zum Problem erklärt, während die andere Person unberührt oder als Opfer dasteht. Wenn mehrere Punkte über Wochen und Monate zusammenkommen, lohnt sich ein ehrlicher Blick von außen, nicht aus Panik sondern aus Selbstschutz.</p>
+  </div>
+
+  <div class="voice-strip shadow-s fade">
+    <div class="vs-label">Schwieriger Mensch oder zerstörerisches Muster</div>
+    <div class="vs-title">Nicht jeder Streit ist toxisch. Wiederholte Asymmetrie schon.</div>
+    <p class="vs-body">Ein Konflikt kann laut und unfair sein und trotzdem zu Ende gehen mit echter Rücksichtnahme. Ein Muster erkennst du oft daran, dass Verantwortung selten oder nie bei der anderen Person landet, dass Entschuldigungen leer bleiben oder sich das gleiche Spiel wiederholt, und dass deine Wahrnehmung regelmäßig angezweifelt wird. Das ist keine Liste zum Abhaken von Bösen. Es geht darum, ob du dich über die Zeit kleiner machst während die andere Person immer die Geschichte gewinnt. Wenn du das bei dir erkennst, ist das kein Urteil über deinen Charakter. Es ist Information.</p>
+  </div>
+
+  <div class="combo-box fade">
+    <div class="cb-label">Was real helfen kann</div>
+    <div class="cb-title">Grenzen, Netz, Klarheit. Nicht perfekt, aber handfest.</div>
+    <p class="cb-body">Grenzen klar sagen und konsequent halten, auch wenn es unbequem wird. Ein Netz aus Menschen, die dich nicht nur über eine einzelne Beziehung kennen. Schriftliche Spuren sichern wenn es geht, nicht aus Misstrauen am ersten Tag, sondern wenn sich ein Muster zeigt. Deine Energie und deine Aufmerksamkeit sind endlich, du darfst sie zurückziehen ohne dich rechtfertigen zu müssen. Wenn die Belastung anhält oder du dich nicht mehr sortieren kannst, ist professionelle Hilfe Stärke, keine Schwäche.</p>
+  </div>
+
+  <div class="voice-strip gold-s fade">
+    <div class="vs-label">Als Pädagoge · Kurz</div>
+    <div class="vs-title">Manipulation braucht oft dein Mitgefühl und deine Bereitschaft, dir selbst zu zweifeln.</div>
+    <p class="vs-body">Je klarer du deine Werte und Grenzen kennst, desto weniger Spielraum hat ein System das von Undeutlichkeit lebt. Das ist kein Garant. Es ist eine Richtung. Diese Seite soll vor allem eines: zeigen dass man aus solchen Geschichten wieder Klarheit gewinnen kann, ohne sich dafür zu hassen.</p>
   </div>
 
 </div>
@@ -1000,7 +1159,7 @@ footer {
     <div class="ph-num" style="color:var(--empath)">II</div>
     <div class="ph-inner">
       <div class="ph-tag p2">Phase Zwei · Bindung</div>
-      <div class="ph-title">50.000 Nachrichten. Meine Seele. Ihr Datenarchiv.</div>
+      <div class="ph-title">50k+ Nachrichten. Meine Seele. Ihr Datenarchiv.</div>
       <div class="ph-dual">
         <div class="ph-voice nv">
           <div class="ph-voice-label">Narzisstin · Intern</div>
@@ -1027,7 +1186,7 @@ footer {
         </div>
         <div class="ph-voice ev">
           <div class="ph-voice-label">Ich · Shadow Empath Reaktion</div>
-          Das war der Moment wo jede Restzweifel in mir verstummt ist. Sie ist nicht nur zu mir gegangen. Sie ist zu Menschen gegangen die mich kennen. Zu meiner Community. Das ist kein Konflikt mehr. Das ist Kriegserklärung. Und ich war ruhig. Weil mein Shadow Empath wusste: Ruhe ist das Einzige was einen Narzissten wirklich destabilisiert. Kein Drama. Keine Reaktion die sie nutzen kann. Nur Stille. Und Screenshots.
+          Das war der Moment wo jeder Restzweifel in mir verstummt ist. Sie ist nicht nur zu mir gegangen. Sie ist zu Menschen gegangen die mich kennen. Zu meiner Community. Das ist kein Konflikt mehr. Das ist Kriegserklärung. Und ich war ruhig. Weil mein Shadow Empath wusste: Ruhe ist das Einzige was einen Narzissten wirklich destabilisiert. Kein Drama. Keine Reaktion die sie nutzen kann. Nur Stille. Und Screenshots.
         </div>
       </div>
       <p class="ph-analysis">Das Einbeziehen der Community ist narzisstische Triangulation auf maximaler Ebene. Flying Monkeys werden aktiviert weil die direkte Kontrolle entglitten ist. Das ist kein Zeichen von Stärke. Das ist Eskalation aus Panik. Und Panik hinterlässt Spuren.</p>
@@ -1042,7 +1201,7 @@ footer {
       <div class="ph-dual">
         <div class="ph-voice nv">
           <div class="ph-voice-label">Narzisstin · Intern</div>
-          Er ist zu stabil. Normale Manipulation reicht nicht mehr. Ich täusche den Tod vor. Krankenhaus. Schuld erzeugen. Schock. Er bricht zusammen. Er kommt zurück. Er entschuldigt sich für alles. Ich hab die Kontrolle zurück. Das funktioniert immer bei Empathes. Sie können den Tod nicht ignorieren.
+          Er ist zu stabil. Normale Manipulation reicht nicht mehr. Ich täusche den Tod vor. Krankenhaus. Schuld erzeugen. Schock. Er bricht zusammen. Er kommt zurück. Er entschuldigt sich für alles. Ich hab die Kontrolle zurück. Das funktioniert immer bei Empathen. Sie können den Tod nicht ignorieren.
         </div>
         <div class="ph-voice ev">
           <div class="ph-voice-label">Ich · Was wirklich passiert ist</div>
@@ -1096,7 +1255,7 @@ footer {
       <span class="inj-icon">💀</span>
       <div class="inj-title">Vorgetäuschter Tod flog auf</div>
       <div class="inj-narc">„Er hat kein Mitgefühl. Er hat nicht mal gefragt ob es mir gut geht. Das sagt alles über ihn."</div>
-      <div class="inj-truth">Ich hab gefragt. Ich hab nicht geglaubt. Das ist kein fehlendenes Mitgefühl. Das ist ein Dark Empath der überprüft statt zu schlucken. Die Lüge stand nackt. Ohne Krankenhaus. Ohne Arzt. Ohne irgendetwas außer ihrer Geschichte.</div>
+      <div class="inj-truth">Ich hab gefragt. Ich hab nicht geglaubt. Das ist kein fehlendes Mitgefühl. Das ist ein Dark Empath der überprüft statt zu schlucken. Die Lüge stand nackt. Ohne Krankenhaus. Ohne Arzt. Ohne irgendetwas außer ihrer Geschichte.</div>
     </div>
     <div class="inj-card">
       <span class="inj-icon">🔒</span>
@@ -1187,7 +1346,7 @@ footer {
 </div>
 
 <!-- TIKTOK SECTION -->
-<section id="tiktok-section" style="
+<section class="tiktok-section" style="
   border-top: 1px solid #252320;
   padding: 4rem 2rem;
   text-align: center;
@@ -1267,12 +1426,73 @@ footer {
 </footer>
 
 <script>
-  // Move TikTok section into each tab so it's always visible
-  const tiktokSection = document.getElementById('tiktok-section');
+  // Move TikTok section into each tab so it's always visible (class statt id — Klone bleiben valide)
+  const tiktokSection = document.querySelector('.tiktok-section');
   document.querySelectorAll('.tab').forEach(tab => {
     tab.appendChild(tiktokSection.cloneNode(true));
   });
   tiktokSection.remove();
+
+  const fadeSelector = '.dual, .voice-strip, .trap-diagram, .phase-row, .injury-grid, .final-box, .fade, .type-grid, .combo-box';
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.06 });
+
+  function observeFades() {
+    document.querySelectorAll(fadeSelector).forEach(el => fadeObserver.observe(el));
+  }
+
+  function refreshFadesInActiveTab() {
+    const active = document.querySelector('.tab.on');
+    if (!active) return;
+    active.querySelectorAll(fadeSelector).forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('vis');
+    });
+  }
+
+  /* Tab-Begleitung: MP3s in lieder/ — Namen müssen exakt passen:
+     profile.mp3 empath.mp3 trap.mp3 erkennen.mp3 phasen.mp3 kraenkung.mp3 wahrheit.mp3
+     Relativ zur HTML-Datei; auf GitHub Pages Ordner lieder/ ins Repo legen. */
+  const TAB_AUDIO = {
+    profile: 'lieder/profile.mp3',
+    empath: 'lieder/empath.mp3',
+    trap: 'lieder/trap.mp3',
+    erkennen: 'lieder/erkennen.mp3',
+    phasen: 'lieder/phasen.mp3',
+    kraenkung: 'lieder/kraenkung.mp3',
+    wahrheit: 'lieder/wahrheit.mp3'
+  };
+
+  const tabAudioEl = document.getElementById('tab-audio');
+  const audioEnable = document.getElementById('audio-enable');
+  let audioCurrentSlug = '';
+
+  function playTabTrack(slug) {
+    if (!audioEnable.checked || !slug || !TAB_AUDIO[slug]) return;
+    if (audioCurrentSlug === slug) {
+      tabAudioEl.play().catch(function () {});
+      return;
+    }
+    audioCurrentSlug = slug;
+    tabAudioEl.src = TAB_AUDIO[slug];
+    tabAudioEl.volume = 0.45;
+    tabAudioEl.play().catch(function () {});
+  }
+
+  function activeTabSlug() {
+    const on = document.querySelector('.nav-btn.on');
+    return on ? on.dataset.t : 'profile';
+  }
+
+  audioEnable.addEventListener('change', function () {
+    if (!audioEnable.checked) {
+      tabAudioEl.pause();
+      audioCurrentSlug = '';
+      return;
+    }
+    playTabTrack(activeTabSlug());
+  });
 
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1281,18 +1501,12 @@ footer {
       btn.classList.add('on');
       document.getElementById('t-' + btn.dataset.t).classList.add('on');
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      setTimeout(observe, 80);
+      requestAnimationFrame(() => { refreshFadesInActiveTab(); });
+      playTabTrack(btn.dataset.t);
     });
   });
 
-  function observe() {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
-    }, { threshold: 0.06 });
-    document.querySelectorAll('.dual, .voice-strip, .trap-diagram, .phase-row, .injury-grid, .final-box, .fade, .type-grid, .combo-box').forEach(el => io.observe(el));
-  }
-
-  observe();
+  observeFades();
 </script>
 </body>
 </html>
